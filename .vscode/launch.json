@@ -26,7 +26,7 @@
 			"name": "msvc",
 			"type": "cppvsdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/dist/x64/Debug/Tensegrity.exe",
+			"program": "${workspaceFolder}/dist/x64/Debug/Stability.exe",
 			"args": [],
 			"environment": [],
 			"stopAtEntry": false,
