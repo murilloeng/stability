@@ -1,0 +1,35 @@
+{
+	"configurations": 
+	[
+		{
+			"name": "Linux",
+			"includePath": 
+			[
+				"${QT_HOME}/include",
+				"${workspaceFolder}/.."
+			],
+			"defines": [],
+			"cStandard": "gnu17",
+			"cppStandard": "gnu++17",
+			"intelliSenseMode": "gcc-x64",
+			"compilerPath": "/usr/bin/gcc"
+		},
+		{
+			"name": "Win32",
+			"includePath":
+			[
+				"${workspaceFolder}/..",
+				"C:/Qt/6.7.0/msvc2019_64/include",
+				"${workspaceFolder}/../external/cpp/inc"
+			],
+			"defines":
+			[
+				"NOMINMAX",
+				"_USE_MATH_DEFINES"
+			],
+			"cppStandard": "c++20",
+			"intelliSenseMode": "windows-msvc-x64"
+		}
+	],
+	"version": 4
+}

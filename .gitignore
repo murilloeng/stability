@@ -1,0 +1,12 @@
+*
+!*/
+!*.md
+!*.ui
+!*.cpp
+!*.hpp
+!*.sln
+!Makefile
+!*.vcxproj
+!.gitignore
+!.vscode/*.json
+build/uic/*.hpp
