@@ -16,11 +16,18 @@
   <widget class="QWidget" name="central_widget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QOpenGLWidget" name="canvas"/>
+     <widget class="Canvas" name="canvas"/>
     </item>
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Canvas</class>
+   <extends>QOpenGLWidget</extends>
+   <header>stability/inc/Canvas.hpp</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

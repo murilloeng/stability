@@ -9,7 +9,7 @@ CXX = g++
 WARS += -Wall
 LIBS += -L $(qln)
 INCS += -I .. -I $(qde) -I $(qin)
-LIBS += -l Qt6Core -l Qt6Gui -l Qt6Widgets -l Qt6OpenGL -l Qt6OpenGLWidgets
+LIBS += -l GL -l Qt6Core -l Qt6Gui -l Qt6Widgets -l Qt6OpenGL -l Qt6OpenGLWidgets
 CXXFLAGS += -std=c++20 -fPIC -pipe -fopenmp -MT $@ -MMD -MP -MF $(subst .o,.d, $@) $(DEFS) $(INCS) $(WARS)
 
 #mode
