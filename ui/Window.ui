@@ -15,7 +15,81 @@
   </property>
   <widget class="QWidget" name="central_widget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="2" column="1">
+     <widget class="QFrame" name="frame">
+      <property name="maximumSize">
+       <size>
+        <width>300</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="1">
+        <widget class="QComboBox" name="combo_mode">
+         <item>
+          <property name="text">
+           <string>Energy</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Force</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Stiffness</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Stability</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_mode">
+         <property name="text">
+          <string>Mode:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="push_add">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../rsc/stability.qrc">
+           <normaloff>:/icons/add.svg</normaloff>:/icons/add.svg</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="push_remove">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../rsc/stability.qrc">
+           <normaloff>:/icons/remove.svg</normaloff>:/icons/remove.svg</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="4">
+        <widget class="QTableWidget" name="table_points"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="0">
      <widget class="Canvas" name="canvas"/>
     </item>
    </layout>
@@ -28,6 +102,8 @@
    <header>stability/inc/Canvas.hpp</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../rsc/stability.qrc"/>
+ </resources>
  <connections/>
 </ui>

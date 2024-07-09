@@ -16,5 +16,9 @@ Canvas::~Canvas(void)
 //openGL
 void Canvas::initializeGL(void)
 {
+	//setup
+	initializeOpenGLFunctions();
+	//clear color
 	glClearColor(0, 0, 1, 1);
+	
 }

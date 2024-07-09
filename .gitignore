@@ -11,3 +11,4 @@
 !.gitignore
 !.vscode/*.json
 build/uic/*.hpp
+build/rsc/*.cpp

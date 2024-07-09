@@ -1,9 +1,10 @@
 #pragma once
 
 //qt
+#include <QtGui/QOpenGLFunctions>
 #include <QtOpenGLWidgets/QOpenGLWidget>
 
-class Canvas : public QOpenGLWidget
+class Canvas : public QOpenGLWidget, public QOpenGLFunctions
 {
 public:
 	//constructors
