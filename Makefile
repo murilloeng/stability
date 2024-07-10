@@ -2,6 +2,7 @@
 qln = $(QT_HOME)/lib
 qin = $(QT_HOME)/include
 uic = $(QT_HOME)/libexec/uic
+rcc = $(QT_HOME)/libexec/rcc
 qde = $(QT_HOME)/mkspecs/linux-g++
 
 #compiler
@@ -27,6 +28,9 @@ out = dist/$(mode)/stability.out
 #interfaces
 uif := $(sort $(shell find -path './ui/*.ui'))
 
+#ressources
+qrc := $(sort $(shell find -path './rsc/*.qrc'))
+
 #sources
 src := $(sort $(shell find -path './src/*.cpp'))
 
@@ -34,14 +38,15 @@ src := $(sort $(shell find -path './src/*.cpp'))
 uig := $(subst ./ui/, build/uic/, $(patsubst %.ui, %.hpp, $(uif)))
 
 #objects
-obj := $(sort $(subst ./src/, build/$(mode)/, $(addsuffix .o, $(basename $(src)))))
+obj += $(subst ./rsc/, build/$(mode)/rsc/, $(patsubst %.qrc, %.o, $(qrc)))
+obj += $(sort $(subst ./src/, build/$(mode)/, $(addsuffix .o, $(basename $(src)))))
 
 #dependencies
 dep := $(subst .o,.d, $(obj))
 
 #rules
 all : $(out)
-	@echo 'build($(mode)): complete!'
+	@echo 'build - $(mode): complete!'
 
 run : $(out)
 	@./$(out)
@@ -51,18 +56,28 @@ uic : $(uig)
 debug : 
 	@gdb $(out) -x gdb.txt
 
-$(out) : $(uig) $(obj)
-	@echo 'executable($(mode)): $@'
+$(out) : $(uig) $(qrc) $(obj)
+	@echo 'executable - $(mode): $@'
 	@mkdir -p $(dir $@) && rm -rf $@
 	@$(CXX) -fopenmp -o $(out) -Wl,-rpath,$(qln) $(obj) ../Math/dist/$(mode)/libmath.so ../Canvas/dist/$(mode)/libcanvas.so $(LIBS)
 
 build/uic/%.hpp : ui/%.ui
-	@echo 'uicing($(mode)): $<'
+	@echo 'uicing - $(mode): $<'
 	@mkdir -p $(dir $@) && rm -rf $@
 	@$(uic) $< -o $@
 
+build/rsc/%.cpp : rsc/%.qrc
+	@echo 'rccing - $(mode): $<'
+	@mkdir -p $(dir $@) && rm -rf $@
+	@$(rcc) $< -o $@
+
 build/$(mode)/%.o : src/%.cpp build/$(mode)/%.d
-	@echo 'compiling($(mode)): $<'
+	@echo 'compiling - $(mode): $<'
+	@mkdir -p $(dir $@) && rm -rf $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
+
+build/$(mode)/rsc/%.o : build/rsc/%.cpp build/$(mode)/rsc/%.d
+	@echo 'compiling - $(mode): $<'
 	@mkdir -p $(dir $@) && rm -rf $@
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
@@ -73,9 +88,9 @@ $(dep) : ;
 clean :
 	@rm -rf dist/$(mode)
 	@rm -rf build/$(mode)
-	@echo 'clean($(mode)): complete!'
+	@echo 'clean - $(mode): complete!'
 
 print-% :
 	@echo $* = $($*)
 
-.PHONY : all run gui fea clean print-%
+.PHONY : all run clean print-%
