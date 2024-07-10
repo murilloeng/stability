@@ -22,11 +22,12 @@ public:
 
 	//openGL
 	void paintGL(void) override;
+	void resizeGL(int, int) override;
 	void initializeGL(void) override;
 
 	//data
-	QOpenGLBuffer m_vbo[2];
-	QOpenGLBuffer m_ibo[2];
-	QOpenGLVertexArrayObject m_vao[2];
+	QOpenGLBuffer m_vbo;
+	QOpenGLBuffer m_ibo;
+	QOpenGLVertexArrayObject m_vao;
 	QOpenGLShaderProgram m_program[2];
 };
