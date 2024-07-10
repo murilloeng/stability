@@ -6,6 +6,8 @@
 !*.cpp
 !*.hpp
 !*.sln
+!*.frag
+!*.vert
 !Makefile
 !*.vcxproj
 !.gitignore
