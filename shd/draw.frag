@@ -19,6 +19,7 @@ vec3 palette[] = vec3[](
 
 vec3 color(float s)
 {
+	s = min(max(s, 0), 1);
 	const int n = palette.length();
 	const int i = int(floor(n * s));
 	const float r = n * s - floor(n * s);
