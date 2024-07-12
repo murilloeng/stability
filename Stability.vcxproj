@@ -21,11 +21,13 @@
   <ItemGroup>
     <ClInclude Include="inc\Canvas.hpp" />
     <ClInclude Include="inc\Window.hpp" />
+    <ClInclude Include="inc\Stability.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\Stability.cpp" />
     <ClCompile Include="build\rsc\stability.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -126,12 +128,23 @@
       <AdditionalOptions>/Zc:__cplusplus
  %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;%QT_HOME%\lib\Qt6Guid.lib;%QT_HOME%\lib\Qt6Cored.lib;%QT_HOME%\lib\Qt6Widgetsd.lib;%QT_HOME%\lib\Qt6OpenGLd.lib;%QT_HOME%\lib\Qt6OpenGLWidgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;../external/cpp/lib/x64/liblapack.lib;dist/$(platform)/$(configuration)/Math.lib;%QT_HOME%\lib\Qt6Guid.lib;%QT_HOME%\lib\Qt6Cored.lib;%QT_HOME%\lib\Qt6Widgetsd.lib;%QT_HOME%\lib\Qt6OpenGLd.lib;%QT_HOME%\lib\Qt6OpenGLWidgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>python pre-build.py</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy ..\external\cpp\dll\x64\libblas.dll dist\$(platform)\$(configuration) &gt; nul
+copy ..\external\cpp\dll\x64\liblapack.dll dist\$(platform)\$(configuration) &gt; nul
+copy ..\external\cpp\dll\x64\libgfortran-3.dll dist\$(platform)\$(configuration) &gt; nul
+copy ..\external\cpp\dll\x64\libgcc_s_sjlj-1.dll dist\$(platform)\$(configuration) &gt; nul
+copy ..\external\cpp\dll\x64\libquadmath-0.dll dist\$(platform)\$(configuration) &gt; nul</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -145,17 +158,25 @@
       <AdditionalOptions>/Zc:__cplusplus
  %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;%QT_HOME%\lib\Qt6Gui.lib;%QT_HOME%\lib\Qt6Core.lib;%QT_HOME%\lib\Qt6Widgets.lib;%QT_HOME%\lib\Qt6OpenGL.lib;%QT_HOME%\lib\Qt6OpenGLWidgets.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;../external/cpp/lib/x64/liblapack.lib;dist/$(platform)/$(configuration)/Math.lib;%QT_HOME%\lib\Qt6Gui.lib;%QT_HOME%\lib\Qt6Core.lib;%QT_HOME%\lib\Qt6Widgets.lib;%QT_HOME%\lib\Qt6OpenGL.lib;%QT_HOME%\lib\Qt6OpenGLWidgets.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>python pre-build.py</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy ..\external\cpp\dll\x64\libblas.dll dist\$(platform)\$(configuration) &gt; nul
+copy ..\external\cpp\dll\x64\liblapack.dll dist\$(platform)\$(configuration) &gt; nul
+copy ..\external\cpp\dll\x64\libgfortran-3.dll dist\$(platform)\$(configuration) &gt; nul
+copy ..\external\cpp\dll\x64\libgcc_s_sjlj-1.dll dist\$(platform)\$(configuration) &gt; nul
+copy ..\external\cpp\dll\x64\libquadmath-0.dll dist\$(platform)\$(configuration) &gt; nul</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
