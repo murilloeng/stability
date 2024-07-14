@@ -41,19 +41,21 @@ int main(int argc, char** argv)
 	// //start
 	// application.exec();
 	//data
-	double a = 0.10;
-	double e = 0.00;
-	unsigned n = 100;
+	double a = 0.5;
 	Stability stability;
-	void* args[] = {&a};
-	void* path_args[] = {&e};
+	std::vector<math::vector> xp;
 	//stability
+	void* args[] = {&a};
 	stability.m_args = args;
-	stability.load_example(0);
-	for(unsigned i = 0; i <= n; i++)
+	stability.load_example(1);
+	stability.path_search(xp);
+	for(const math::vector& x : xp)
 	{
-		e = 1.30 * double(i) / n;
-		printf("%+.6e %+.6e\n", e, stability.maximum_energy(xs, dxs, path_args));
+		for(unsigned i = 0; i < x.rows(); i++)
+		{
+			printf("%+.2e ", x[i]);
+		}
+		printf("%+.2e\n", stability.m_energy(x, args));
 	}
 	//return
 	return EXIT_SUCCESS;
